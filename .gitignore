@@ -1,0 +1,5 @@
+vcpkg/*
+vcpkg_installed/*
+thirdparty/*
+
+
