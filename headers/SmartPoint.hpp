@@ -3,12 +3,12 @@
 
 #include <mutex>
 
-template<typename T> 
+template<typename T, typename PT> 
 class SmartPoint
 {
-    std::mutex mtx;
+    mutable std::mutex mtx;
 public:
-    SmartPoint(x, y, z): x(x), y(y), z(z){}
+    SmartPoint(T x,T y, T z): x(x), y(y), z(z){}
 private:
     T x, y, z;
     float r, alpha, teta;
