@@ -1,8 +1,12 @@
 #pragma once
 
+
+#include <mutex>
+
 template<typename T> 
-class Point
+class SmartPoint
 {
+    std::mutex mtx;
 public:
     Point(x, y, z): x(x), y(y), z(z){}
 private:
