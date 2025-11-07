@@ -8,7 +8,7 @@ class Cubanoid{
 public:
 
 private:
-    std::vector<Point<float>> points = {
+    std::vector<SmartPoint<float>> points = {
     {-1,-1,-1},{ 1,-1,-1},{ 1, 1,-1},{-1, 1,-1},
     {-1,-1, 1},{ 1,-1, 1},{ 1, 1, 1},{-1, 1, 1}
     };
