@@ -1,4 +1,4 @@
-vcpkg/*
+vcpkg/**
 vcpkg_installed/*
 thirdparty/*
 

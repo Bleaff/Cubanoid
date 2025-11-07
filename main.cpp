@@ -98,7 +98,13 @@ int main(int, char**){
 
     // Рёбра
     for (auto [a,b] : E) {
-      SDL_RenderDrawLineF(ren, P[a].x, P[a].y, P[b].x, P[b].y);
+      if (a == 0 && b == 1){
+        SDL_SetRenderDrawColor(ren, 255, 0, 0, 255);
+        SDL_RenderDrawLineF(ren, P[a].x, P[a].y, P[b].x, P[b].y);
+        SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
+      }
+      else
+        SDL_RenderDrawLineF(ren, P[a].x, P[a].y, P[b].x, P[b].y);
     }
 
     SDL_RenderPresent(ren);
