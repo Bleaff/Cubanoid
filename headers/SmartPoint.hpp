@@ -1,56 +1,7 @@
 #pragma once
 #include <mutex>
 #include <math.h>
-template<typename T>
-class CartesianPoint
-{
-public:
-    // constuctors/destructors
-    CartesianPoint(T x, T y, T z): x(x), y(y), z(z){}
-    CartesianPoint(const CartesianPoint<T>& other): x(other.x), y(other.y), z(other.z){}
-    ~CartesianPoint(){}
-    //operators
-    bool operator==(const CartesianPoint<T>& other) const { return x == other.x && y == other.y && z == other.z; }
-    CartesianPoint<T>& operator=(const CartesianPoint<T>& other) { x = other.x; y = other.y; z = other.z; return *this; }
-    CartesianPoint<T> operator+(const CartesianPoint<T>& other) const { return CartesianPoint<T>(x + other.x, y + other.y, z + other.z); }
-    CartesianPoint<T> operator-(const CartesianPoint<T>& other) const { return CartesianPoint<T>(x - other.x, y - other.y, z - other.z); }
-    CartesianPoint<T> operator*(const CartesianPoint<T>& other) const { return CartesianPoint<T>(x * other.x, y * other.y, z * other.z); }
-    ostream operator<<(ostream& os) const { return os << x << " " << y << " " << z; }
-    
-    x = r*sin(alpha)*sin(teta);
-    y = r * cos(alpha)*sin(teta);
-    z = r*cos(teta);
-    PolarPoint<T> toPolar(){PolarPoint<T>(std::sqrt(x^2 + y^2 + z^2), std::atan2(y, x), std::atan2(std::sqrt(x^2 + y^2), z));};
-    
-public:
-    T x, y, z;
-};
-
-template <typename T>
-class PolarPoint
-{
- /*
-    Polar point - r, alpha, teta
-    alpha, teta - angles in degree's
- */
-public:
-    //constructors/destructors
-    PolarPoint(T r, T alpha, T teta): r(r), alpha(alpha), teta(teta){}
-    PolarPoint(const PolarPoint<T>& other): r(other.r), alpha(other.alpha), teta(other.teta){}
-    ~PolarPoint(){}
-    //operators
-    bool operator==(const PolarPoint<T>& other) const { return r == other.r && alpha == other.alpha && teta == other.teta; }
-    PolarPoint<T>& operator=(const PolarPoint<T>& other) { r = other.r; alpha = other.alpha; teta = other.teta; return *this; }
-    PolarPoint<T> operator+(const PolarPoint<T>& other) const { return PolarPoint<T>(r + other.r, alpha + other.alpha, teta + other.teta); }
-    PolarPoint<T> operator-(const PolarPoint<T>& other) const { return PolarPoint<T>(r - other.r, alpha - other.alpha, teta - other.teta); }
-    PolarPoint<T> operator*(const PolarPoint<T>& other) const { return PolarPoint<T>(r * other.r, alpha * other.alpha, teta * other.teta); }
-    ostream operator<<(ostream& os) const { return os << r << " " << alpha << " " << teta; }
-    CartesianPoint<T> toCartesian(){return CartesianPoint<T>(r*sin(alpha)*sin(teta), r*cos(alpha)*sin(teta), r*cos(teta));};
-public:
-    T r, alpha, teta;
-};
-
-
+#include "PolarPoint.hpp"
 
 template<typename T> 
 class SmartPoint
@@ -111,7 +62,7 @@ public:
     SmartPoint<T> operator+(const SmartPoint<T>& other) const {std::lock_guard<std::mutex> lock(mtx); return SmartPoint<T>(p + other.p); }
     SmartPoint<T> operator-(const SmartPoint<T>& other) const {std::lock_guard<std::mutex> lock(mtx); return SmartPoint<T>(p - other.p); }
     SmartPoint<T> operator*(const SmartPoint<T>& other) const {std::lock_guard<std::mutex> lock(mtx); return SmartPoint<T>(p * other.p); }
-    ostream operator<<(ostream& os) const {std::lock_guard<std::mutex> lock(mtx); return os << p << " " << c; }
+    std::ostream operator<<(std::ostream& os) const {std::lock_guard<std::mutex> lock(mtx); return os << p << " " << c; }
     // operations
     SmartPoint<T> rotate(T alpha, T teta){
         /*
