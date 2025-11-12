@@ -55,6 +55,49 @@ public:
 template<typename T> 
 class SmartPoint
 {
+    /*
+    This 
+SmartPoint
+ class represents a point in 3D space that can be either in Cartesian or Polar coordinates. It has methods to perform operations on the point such as rotation, movement, and getting the coordinates.
+
+Here's a summary of what each method does:
+
+Constructors: Initialize the point in either Cartesian or Polar coordinates.
+Destructor: Clean up any resources used by the point.
+operator==
+: Check if two points are equal.
+operator=
+: Assign one point to another.
+operator+
+, 
+operator-
+, 
+operator*
+: Perform addition, subtraction, and multiplication on two points.
+operator<<
+: Print the point's coordinates.
+rotate
+: Rotate the point around the z-axis by a given angle.
+move
+: Move the point by a given distance in the x, y, and z directions.
+getCartesianPoint
+: Get the Cartesian coordinates of the point.
+getPolarPoint
+: Get the Polar coordinates of the point.
+The mutable std::mutex mtx; is used to protect access to the point's data in the 
+operator==
+, 
+operator=
+, 
+operator+
+, 
+operator-
+, 
+operator*
+, and 
+operator<<
+ methods.
+    */
 public:
     //constructors/destructors
     mutable std::mutex mtx;
