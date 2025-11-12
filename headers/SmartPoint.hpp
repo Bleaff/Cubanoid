@@ -70,7 +70,15 @@ public:
     SmartPoint<T> operator*(const SmartPoint<T>& other) const {std::lock_guard<std::mutex> lock(mtx); return SmartPoint<T>(p * other.p); }
     ostream operator<<(ostream& os) const {std::lock_guard<std::mutex> lock(mtx); return os << p << " " << c; }
     // operations
-    SmartPoint<T> rotate(T alpha, T teta){std::lock_guard<std::mutex> lock(mtx); SmartPoint<T> rotatedPoint {this.p + PolarPoint<T>(0, alpha, teta)}; this = rotatedPoint; return rotatedPoint;};
+    SmartPoint<T> rotate(T alpha, T teta){
+        /*
+        
+        */
+        std::lock_guard<std::mutex> lock(mtx); 
+        SmartPoint<T> rotatedPoint {this.p + PolarPoint<T>(0, alpha, teta)}; 
+        this = rotatedPoint; 
+        return rotatedPoint;
+    };
     SmartPoint<T> move(T x, T y, T z){std::lock_guard<std::mutex> lock(mtx); SmartPoint<T> movedPoint {this.c + CartesianPoint<T>(x, y, z)}; this = movedPoint; return movedPoint;};
     CartesianPoint<T> getCartesianPoint()const{return c;};
     PolarPoint<T> getPolarPoint()const{return p;};
